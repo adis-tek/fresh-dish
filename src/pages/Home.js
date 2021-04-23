@@ -9,11 +9,11 @@ import { render } from '@testing-library/react';
 
 function Home() {
     const delay = require('delay');
-    const [selector, setSelector] = useState("vegan");
-    const [ingredient, setIngredient] = useState("vegan");
+    const [selector, setSelector] = useState("Vegan");
+    const [ingredient, setIngredient] = useState("Vegan");
     const [meals, setMeals] = useState([1]);
     const [randomMeal, setRandomMeal] = useState(0);
-    const [mealId, setMealId] = useState();
+    const [mealId, setMealId] = useState("");
     const [recipe, setRecipe] = useState();
     const [youtubeURL, setYoutubeURL] = useState();
 
@@ -52,8 +52,8 @@ function Home() {
 
     useEffect(() => {
         if (checkMeals) {
-        const max = meals.length;
-        const randomNumber = Math.floor((Math.random() * max) - 0.01);
+        const max = meals?.length;
+        const randomNumber = Math.floor(Math.random() * max);
         console.log(randomNumber);
         setRandomMeal(randomNumber);
     } else {
@@ -63,65 +63,37 @@ function Home() {
 
     console.log(randomMeal);
 
+    useEffect(() => {
     if (randomMeal > meals?.length) {
-        const max = meals.length;
+        const max = meals?.length;
         const newRandomMeal = Math.floor(Math.random() * max);
         console.log("changed random meal");
         setRandomMeal(newRandomMeal);
+    } else {
+        console.log("randomMeal passes first test")
     }
-
-    if (randomMeal === undefined || null) {
-        console.log("it's 1");
-        const newRandomMeal = randomMeal - 1;
-        setRandomMeal(newRandomMeal);
-    } 
+}, [randomMeal]);
 
     useEffect(() => {
-        if (checkMeals()) {
-        console.log("checkMeals was true");
-        };
-    }, [meals])
-
-    if (!checkMeals) {
-    console.log("checkMeals made this skip");
-}
-
-    function filterId () {
-        if (meals[`${randomMeal}`] !== undefined) {
-            return true;
-            console.log("id is valid")
-        } else {
-            return false;
-        }
+    if ((randomMeal + 1) > meals?.length) {
+        console.log("randomMeal was about to output undefined");
+        setRandomMeal(meals?.length - 1);
+    } else {
+        console.log("randomMeal passes second test");
     }
+}, [meals, randomMeal]);
 
     useEffect(() => { 
-        if (filterId) {
-        try {
         const id = meals[`${randomMeal}`]?.idMeal;
         console.log(id);
-        if (id === undefined) {
-            setRandomMeal(randomMeal - 1)
-        }   else {
-        setMealId(id);
         console.log(meals[`${randomMeal}`]?.idMeal);
-        }
-        } catch (error) {
-            console.log(error);
-            console.log(meals[`${randomMeal}`]?.idMeal);
-        };
-} else {
-    console.log("null or undefined");
-}
-return () => {
-    setMealId({});
-};
-    });
+        setMealId(id);
+    }, [meals, randomMeal]);
 
     console.log(mealId);
 
     useEffect(() => {
-        if (mealId !== "") {
+        if (mealId !== undefined) {
         axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
         .then(function (response) {
             console.log(response.data?.meals[0]);
@@ -131,25 +103,13 @@ return () => {
             console.log(error);
         });
     } else {
-        console.log("skipped recipe request");
+        const changeRandomMeal = Math.floor(Math.random() * meals?.length);
+        setRandomMeal(changeRandomMeal);
+        setIngredient(ingredient);
+        console.log("I changed randomMeal");
     }
-    }, [mealId])
+    }, [mealId]);
 
-    function checkRecipe() {
-        if (recipe !== null || undefined) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    useEffect(() => {
-        if (checkRecipe()) {
-            console.log(recipe);
-        } else {
-            console.log("Recipe is no good");
-        }
-    })
 
     //console.log(recipe.map())
     /*useEffect(() => {
@@ -178,6 +138,14 @@ return () => {
                 <MenuItem value="Vegan">Vegan</MenuItem>
                 <MenuItem value="Vegetarian">Vegetarian</MenuItem>
             </Select>
+
+            <div>
+                {mealId === undefined && (
+                    <>
+                        <h1>You didn't select an ingredient.</h1>
+                    </>
+            )}
+            </div>
 
             <div>
                 {recipe !== undefined && (
