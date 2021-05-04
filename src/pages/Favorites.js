@@ -8,6 +8,7 @@ const Favorites = () => {
     const [initiateRight, setInitiateRight] = useState(false);
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [deleteId, setDeleteId] = useState("");
 
     const ref = firebase.firestore().collection("favorites");
 
@@ -20,17 +21,24 @@ const Favorites = () => {
             })
             setFavorites(items);
             setLoading(false);
+            console.log(items);
         })
     }
 
-    function deleteFavorites(favorite) {
-        ref
-            .doc(favorite.id)
-            .delete()
-            .catch((err) => {
-                console.error(err);
-            });
+    useEffect(() => {
+    console.log(deleteId)
+    if (deleteId === "") {
+        console.log("it's empty")
+    } else {
+    ref
+        .doc(`${deleteId}`)
+        ?.delete()
+        .catch((err) => {
+            console.error(err);
+        });
     }
+    }, [deleteId]);
+
 
     useEffect(() => {
         getFavorites();
@@ -44,19 +52,28 @@ const Favorites = () => {
         setInitiateRight(true);
     }
 
+    function deleteFavorites(event) {
+        const id = event?.target?.id;
+        console.log(id);
+        setDeleteId(id);
+        console.log("he pushed me");
+
+    }
+
 
     return (
         <Container>
             <Left>
             <h1>Favorites</h1> <br></br>
             {favorites.map((favorites) => (
-                <div key={favorites.mealId}>
+                <div>
                     <h2>{favorites.name}</h2>
                     <img src={favorites.photo} alt={favorites.name} />
                     <p>{favorites.instructions}</p>
+                    <p>{favorites.mealId}</p>
+                    <button id={favorites.mealId} onClick={deleteFavorites}>DELETE</button>
                 </div>
             ))}
-            <button onClick={handleNewFavorites}>Submit</button>
             </Left>
             {initiateRight && (
                 <Right>
