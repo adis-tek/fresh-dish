@@ -237,6 +237,8 @@ export default function Home() {
                         <FavoritesButton onClick={() => addFavorite({
                             name: recipe.strMeal,
                             photo: recipe.strMealThumb,
+                            country: recipe.strArea,
+                            category: recipe.strCategory,
                             ingredients: [
                                 recipe.strIngredient1,
                                 recipe.strIngredient2,

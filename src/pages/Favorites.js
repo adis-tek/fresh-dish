@@ -5,10 +5,11 @@ import firebase from '../firebase';
 
 const Favorites = () => {
     const [recipeFavorites, setRecipeFavorites] = useContext(FavoritesContext);
-    const [initiateRight, setInitiateRight] = useState(false);
+    const [initiateRight, setInitiateRight] = useState(false); //RESET THIS!!!!!! TO FALSE!!!!
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deleteId, setDeleteId] = useState("");
+    const [rightDisplay, setRightDisplay] = useState([]);
 
     const ref = firebase.firestore().collection("favorites");
 
@@ -48,8 +49,37 @@ const Favorites = () => {
         return <h1>Loading...</h1>;
     }
 
-    function handleNewFavorites() {
-        setInitiateRight(true);
+    function firebaseTest() {
+        ref
+            .doc("52858")
+            .get().then((doc) => {
+                if (doc.data !== undefined) {
+                console.log(doc.data())
+                const data = doc.data();
+                setRightDisplay(data);
+                console.log(data);
+                }   else {
+                    console.log("no doc")
+                }
+            })
+    }
+
+    function divClick(event) {
+        console.log("Div was clicked");
+        const id = event?.currentTarget?.id;
+        console.log(id);
+        ref
+        .doc(id)
+        .get().then((doc) => {
+            if (doc.data !== undefined) {
+            console.log(doc.data())
+            const data = doc.data();
+            setRightDisplay(data);
+            console.log(data);
+            }   else {
+                console.log("no doc")
+            }
+        })
     }
 
     function deleteFavorites(event) {
@@ -57,79 +87,89 @@ const Favorites = () => {
         console.log(id);
         setDeleteId(id);
         console.log("he pushed me");
-
+        setInitiateRight(false);
     }
 
+    function initiateRightFunc() {
+        setInitiateRight(!initiateRight);
+    }
+
+    function off() {
+        setInitiateRight(false);
+    }
+
+    function on() {
+        setInitiateRight(true);
+    }
 
     return (
         <Container>
             <Left>
+                <button onClick={off}>OFF</button>
+                <button onClick={on}>ON</button>
+            <button onClick={firebaseTest}>Firebase test log</button>
             <h1>Favorites</h1> <br></br>
             {favorites.map((favorites) => (
-                <div>
+                <div id={favorites.mealId} onClick={divClick}>
                     <h2>{favorites.name}</h2>
-                    <img src={favorites.photo} alt={favorites.name} />
+                    <img src={favorites.photo} onClick={initiateRightFunc} alt={favorites.name} />
                     <p>{favorites.instructions}</p>
                     <p>{favorites.mealId}</p>
                     <button id={favorites.mealId} onClick={deleteFavorites}>DELETE</button>
                 </div>
             ))}
             </Left>
-            {initiateRight && (
+            {initiateRight === true && (
                 <Right>
-                    {/*
-                    {favorites.map((favorites) => (
+                    <h1>{rightDisplay?.name}</h1>
                 <RecipeRandomizer>
                     <Section1>
-                    <ImgVertical src={favorites.photo} alt={favorites.name} />
+                    <ImgVertical src={rightDisplay?.photo} alt={rightDisplay?.name} />
                     <TextContainer>
-                    <Title>{recipe.strMeal}</Title>
-                    <Subtitle>{recipe.strArea} Recipe - {recipe.strCategory}</Subtitle>
+                    <Title>{rightDisplay?.name}</Title>
+                    <Subtitle>{rightDisplay?.country} Recipe - {rightDisplay?.category}</Subtitle>
                     <Ingredients>Ingredients</Ingredients>
                     <IngredientSection>
                     <IngredientContainer>
-                    <Ingredient>{recipe.strIngredient1} {recipe.strMeasure1}</Ingredient>
-                    <Ingredient>{recipe.strIngredient2} {recipe.strMeasure2}</Ingredient>
-                    <Ingredient>{recipe.strIngredient3} {recipe.strMeasure3}</Ingredient>
-                    <Ingredient>{recipe.strIngredient4} {recipe.strMeasure4}</Ingredient>
-                    <Ingredient>{recipe.strIngredient5} {recipe.strMeasure5}</Ingredient>
-                    <Ingredient>{recipe.strIngredient6} {recipe.strMeasure6}</Ingredient>
-                    <Ingredient>{recipe.strIngredient7} {recipe.strMeasure7}</Ingredient>
-                    <Ingredient>{recipe.strIngredient8} {recipe.strMeasure8}</Ingredient>
-                    <Ingredient>{recipe.strIngredient9} {recipe.strMeasure9}</Ingredient>
-                    <Ingredient>{recipe.strIngredient10} {recipe.strMeasure10}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[0]} {rightDisplay?.measurements?.[0]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[1]} {rightDisplay?.measurements?.[1]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[2]} {rightDisplay?.measurements?.[2]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[3]} {rightDisplay?.measurements?.[3]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[4]} {rightDisplay?.measurements?.[4]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[5]} {rightDisplay?.measurements?.[5]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[6]} {rightDisplay?.measurements?.[6]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[7]} {rightDisplay?.measurements?.[7]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[8]} {rightDisplay?.measurements?.[8]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[9]} {rightDisplay?.measurements?.[9]}</Ingredient>
                     </IngredientContainer>
                     <IngredientContainer>
-                    <Ingredient>{recipe.strIngredient11} {recipe.strMeasure11}</Ingredient>
-                    <Ingredient>{recipe.strIngredient12} {recipe.strMeasure12}</Ingredient>
-                    <Ingredient>{recipe.strIngredient13} {recipe.strMeasure13}</Ingredient>
-                    <Ingredient>{recipe.strIngredient14} {recipe.strMeasure14}</Ingredient>
-                    <Ingredient>{recipe.strIngredient15} {recipe.strMeasure15}</Ingredient>
-                    <Ingredient>{recipe.strIngredient16} {recipe.strMeasure16}</Ingredient>
-                    <Ingredient>{recipe.strIngredient17} {recipe.strMeasure17}</Ingredient>
-                    <Ingredient>{recipe.strIngredient18} {recipe.strMeasure18}</Ingredient>
-                    <Ingredient>{recipe.strIngredient19} {recipe.strMeasure19}</Ingredient>
-                    <Ingredient>{recipe.strIngredient20} {recipe.strMeasure20}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[10]} {rightDisplay?.measurements?.[10]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[11]} {rightDisplay?.measurements?.[11]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[12]} {rightDisplay?.measurements?.[12]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[13]} {rightDisplay?.measurements?.[13]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[14]} {rightDisplay?.measurements?.[14]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[15]} {rightDisplay?.measurements?.[15]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[16]} {rightDisplay?.measurements?.[16]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[17]} {rightDisplay?.measurements?.[17]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[18]} {rightDisplay?.measurements?.[18]}</Ingredient>
+                    <Ingredient>{rightDisplay?.ingredients?.[19]} {rightDisplay?.measurements?.[19]}</Ingredient>
                     </IngredientContainer>
                     </IngredientSection>
-                    <Instructions>{recipe.strInstructions}</Instructions>
+                    <Instructions>{rightDisplay?.instructions}</Instructions>
                     <SourceLinks>
-                    <RecipeSource href={recipe.strSource} target="_blank">Where This Recipe Came From</RecipeSource>
+                    <RecipeSource href={rightDisplay?.recipeSource} target="_blank">Where This Recipe Came From</RecipeSource>
                     </SourceLinks>
                     </TextContainer>
                     <ImageSection>
-                    <Img src={recipe.strMealThumb} alt={recipe.strMeal} />
-                    {youtubeURL && <Youtube><iframe id="recipeVideo" width="450" height="250" src={youtubeURL} frameborder="0" allowfullscreen></iframe></Youtube>}
+                    <Img src={rightDisplay?.photo} alt={rightDisplay?.name} />
+                    <Youtube><iframe id="recipeVideo" width="450" height="250" src={rightDisplay?.youtubeVideo} frameborder="0" allowfullscreen></iframe></Youtube>
                     </ImageSection>
                     </Section1>
                 </RecipeRandomizer>
-                ))}
-                    */}
                 </Right>
-            )}
-        </Container>
-    )
-}
+    )}
+    </Container>
+)}
 
 const Container = styled.div`
     display: flex;
