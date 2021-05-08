@@ -36,12 +36,12 @@ function LogIn() {
         {error && <ErrorContainer><Error>{error}</Error></ErrorContainer>}
             <Form onSubmit={handleSubmit}>
                 <InputContainer>
-                <Label for="email">Email:</Label><br></br>
+                <Label for="email">Email</Label><br></br>
                 <InputText type="text" id="email" name="email" ref={emailRef} />
                 </InputContainer>
 
                 <InputContainer>
-                <Label for="password">Password:</Label><br></br>
+                <Label for="password">Password</Label><br></br>
                 <InputText type="text" id="password" name="password" ref={passwordRef} />
                 </InputContainer>
 
@@ -90,7 +90,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     background-image: url(${food_background_horizontal});
-    @media (max-width: 600px) {
+    @media (max-width: 1025px) {
     background-image: url(${food_background_vertical});
     }
     background-repeat: no-repeat;
@@ -108,6 +108,17 @@ const FormContainer = styled.div`
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.60);
     backdrop-filter: blur(10px);
+    margin: 30px 0px;
+    @media (max-width: 1025px) {
+        width: 67.5%;
+        height: 800px;
+    }
+    @media (max-width: 450px) {
+        width: 87.5%;
+    }
+    @media (max-width: 300px) {
+        width: 92.5%;
+    }
 `;
 
 const Heading = styled.h1`
@@ -148,7 +159,7 @@ const InputText = styled.input`
 const InputSubmit = styled.button`
     width: 150px;
     height: 40px;
-    background-color: orange;
+    background-color: #ff8d30;
     color: white;
     margin: 20px 0px;
     border-radius: 20px;

@@ -25,6 +25,7 @@ export default function Home() {
     const history = useHistory();
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [favoriteAnimation, setFavoriteAnimation] = useState(false);
 
     const ref = firebase.firestore().collection("favorites");
 
@@ -43,6 +44,7 @@ export default function Home() {
     }
 
     function addFavorite(newFavorite) {
+        setFavoriteAnimation(true)
         ref
             .doc(mealId)
             .set(newFavorite)
@@ -160,6 +162,8 @@ export default function Home() {
         console.log("favorite button");
         //setRecipeFavorites(prevFavorites => [...prevFavorites, "New favorite added"]);
     }
+
+    
 
 
     return (
@@ -290,6 +294,9 @@ export default function Home() {
                             })}>
                         Add to Favorites
                         </FavoritesButton>
+                        {favoriteAnimation && (
+                        <MessageContainer><Message>Added to favorites!</Message></MessageContainer>
+                        )}
                     </Favorites>
                     <SourceLinks>
                     <RecipeSource href={recipe.strSource} target="_blank">Where This Recipe Came From</RecipeSource>
@@ -484,6 +491,9 @@ const Youtube = styled.div`
 `;
 
 const Favorites = styled.div`
+    display: flex;
+    align-items: center;
+    justify-items: center;
     width: 90%;
     margin: 20px;
 `;
@@ -495,6 +505,22 @@ const FavoritesButton = styled.button`
     background: orange;
     color: white;
     border-radius: 20px;
+    outline: none;
+    border: none;
+    margin-right: 30px;
+`;
+
+const MessageContainer = styled.div`
+    width: auto;
+    height: auto;
+    background-color: rgb(0,250,154);
+    border: 0.5px solid rgba(9,73,0, 0.5);
+`;
+
+const Message = styled.h5`
+    margin: 15px;
+    color: rgb(9,73,0);
+
 `;
 
 const SourceLinks = styled.div`
