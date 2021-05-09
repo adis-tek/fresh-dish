@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans', sans-serif;
         //border: 1px solid red;
         overflow-x: hidden;
+        outline: none;
     }
 
     label {

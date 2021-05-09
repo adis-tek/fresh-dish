@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useContext} from 'react';
 import { FavoritesContext } from '../contexts/FavoritesContext';
 import styled from 'styled-components';
-import deleteCircle from '../images/deleteCircle.svg';
-import x from '../images/x.png';
+import deleteCircle from '../images/x.png';
 import firebase from '../firebase';
 import { faDashcube } from '@fortawesome/free-brands-svg-icons';
 
@@ -252,15 +251,24 @@ const FavHeader = styled.h1`
 const Container = styled.div`
     display: flex;
     width: 100vw;
+    @media (min-width: 1500px) {
+    position: absolute;
+    width: 1500px;
+    align-self: center;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    }
 `;
 
 const Left = styled.div`
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 50%;
     margin-top: 40px;
     margin-left: 30px;
-    width: 69%;
     @media (max-width: 1024px) {
         width: 100%;
         margin: 0px 0px 0px 7px;
@@ -270,8 +278,9 @@ const Left = styled.div`
 const Right = styled.div`
     display: flex;
     flex-direction: column;
-    width: 69%;
-    margin: 0px 10px;
+    width: 50%;
+    padding-left: 20px;
+    padding-right: 20px;
     @media (max-width: 1024px) {
         display: none;
     }
@@ -299,8 +308,9 @@ const Mobile = styled.div`
 const MobileDelete = styled.img`
     display: flex;
     align-self: flex-end;
-    width: 8%;
-    height: 8%;
+    width: 50%;
+    height: auto;
+    object-fit: cover;
     text-align: center;
     overflow: hidden;
     cursor: pointer;
@@ -320,7 +330,7 @@ const FavoriteContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 5px 0px;
+    padding: 5px 5px;
     justify-content: space-evenly;
 `;
 
@@ -333,9 +343,8 @@ const Name = styled.h2`
     padding-right: 8px;
     justify-content: justify;
     margin: 6px 3px;
-    font-size: 20px;
-    @media (max-width: 1260px) {
     font-size: 18px;
+    @media (max-width: 1260px) {
     }
     @media (max-width: 1000px) {
     font-size: 16px;
@@ -356,13 +365,10 @@ const Description = styled.p`
     overflow: hidden;
     padding-left: 8px;
     padding-right: 8px;
-    font-size: 15px;
-    margin: 6px 3px;
-    @media (max-width: 1260px) {
-    font-size: 13px;
-    }
-    @media (max-width: 1000px) {
     font-size: 12px;
+    margin: 6px 3px;
+    @media (min-width: 1250px) {
+        font-size: 14px;
     }
 `;
 
@@ -371,11 +377,8 @@ const Tags = styled.p`
     color: grey;
     padding-left: 8px;
     padding-right: 8px;
-    font-size: 14px;
-    margin: 15px 3px;
-    @media (max-width: 1260px) {
     font-size: 12px;
-    }
+    margin: 15px 3px;
     @media (max-width: 1000px) {
     font-size: 11px;
     }
@@ -384,19 +387,20 @@ const Tags = styled.p`
 const Delete = styled.img`
     display: flex;
     align-self: flex-start;
-    width: 12%;
-    height: 12%;
+    width: 7%;
+    height: 7%;
     text-align: center;
     overflow: hidden;
     cursor: pointer;
     padding: 13px 7px;
+    object-fit: scale-down;
     @media (max-width: 1260px) {
-    width: 10%;
-    height: 10%;
+    width: 7%;
+    height: 7%;
     }
     @media (max-width: 1000px) {
-    width: 9%;
-    height: 9%;
+    width: 7%;
+    height: 7%;
     }
 `;
 
@@ -485,27 +489,18 @@ const ImageSection = styled.div`
 `;
 
 const Img = styled.img`
-    width: 100%;
-    height: auto;
-    align-self: flex-start;
-    margin: 0px 30px;
-    @media (max-width: 1260px) {
     display: none;
-    }
     @media (max-width: 1024px) {
     width: 60%;
     }
 `;
 
 const ImgVertical = styled.img`
-    display: none;
-    @media (max-width: 1260px) {
     display: flex;
     align-self: center;
     width: 90%;
     height: auto;
     margin-bottom: 15px;
-    }
     @media (max-width: 1024px) {
     width: 80%;
     height: auto;
@@ -560,6 +555,9 @@ const Instructions = styled.p`
     line-height: 1.5em;
     @media (max-width: 1024px) {
         width: 85%;
+    }
+    @media (max-width: 400px) {
+        font-size: 14px;
     }
     
 `;
@@ -638,16 +636,11 @@ const Ingredient = styled.h5`
 
 const Section1 = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 45px;
     margin-bottom: 30px;
-    @media (max-width: 1260px) {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    }
     @media (max-width: 1024px) {
         width: 85%;
     }

@@ -159,7 +159,7 @@ const InputText = styled.input`
 const InputSubmit = styled.button`
     width: 150px;
     height: 40px;
-    background-color: #ff8d30;
+    background-color: #FF8E53;
     color: white;
     margin: 20px 0px;
     border-radius: 20px;

@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import LogoImg from '../images/fresh_dish_logo_2.png';
-import LogoMobileImg from '../images/fresh_dish_mobile.png';
+import LogoMobileImg from '../images/fresh_dish_logo_1_mobile.png';
 
 function Nav() {
     const [error, setError] = useState("");
@@ -54,9 +54,11 @@ const LogoContainer = styled.div`
     margin-left: 30px;
     @media (max-width: 500px) {
         margin-left: 55px;
+        width: 70%;
     }
     @media (max-width: 400px) {
         margin-left: 45px;
+        width: 70%;
     }
 `;
 
@@ -80,24 +82,27 @@ const LogoImage = styled.img`
 
 const LogoMobile = styled.img`
     display: none;
+    object-fit: cover;
+    height: auto;
+    padding-right: 5px;
+    padding-left: 5px;
     @media (max-width: 1024px) {
     display: none;
     width: 100px;
-    height: 100px;
+    height: auto;
     align-self: center;
     justify-self: center;
     }
     @media (max-width: 500px) {
     display: flex;
-    width: 70px;
-    height: 70px;
+    width: 200px;
     align-self: center;
     justify-self: center;
     }
     @media (max-width: 400px) {
     display: flex;
-    width: 60px;
-    height: 60px;
+    width: 40vw;
+    height: 30px;
     align-self: center;
     justify-self: center;
     }
@@ -129,7 +134,7 @@ const Login = styled.h3`
     width: 200px;
     height: 50px;
     line-height: 50px;
-    background-color: #ff8d30;
+    background-color: #FF8E53;
     color: white;
     border: 1px solid rgba(255, 165, 0, 0.1);
     box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, .15);
@@ -162,7 +167,7 @@ const SignUp = styled.h3`
     width: 200px;
     height: 50px;
     line-height: 50px;
-    background-color: #ff8d30;
+    background-color: #FF8E53;
     box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, .15);
     color: white;
     transition: transform 250ms;
@@ -185,7 +190,7 @@ const SignUp = styled.h3`
 
 const LogOut = styled.h3`
     text-decoration: none;
-    margin: 0px 15px;
+    margin: 0px 50px 0px 0px;
     align-self: center;
     justify-self: center;
     text-align: center;
@@ -193,7 +198,7 @@ const LogOut = styled.h3`
     width: 150px;
     height: 50px;
     line-height: 50px;
-    background-color: #ff8d30;
+    background-color: #FF8E53;
     box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, .15);
     color: white;
     cursor: pointer;
@@ -203,13 +208,16 @@ const LogOut = styled.h3`
     }
     @media (max-width: 750px) {
     width: 150px;
-    margin: 0px 7px;
+    margin: 0px 25px 0px 0px;
     transform: translateY(-5px);
     }
-    @media (min-width: 500px) and (max-width: 550px) {
+    @media (max-width: 550px) {
+        margin: 0px 25px 0px 0px;
         width: 130px;
+        font-size: 14px;
     }
     @media (max-width: 400px) {
+        margin: 0px 25px 0px 0px;
         font-size: 14px;
     }
 `;

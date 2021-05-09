@@ -1,7 +1,8 @@
 import React, { useState, useEffect} from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { Select, MenuItem } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 import useLocalStorage from '../useLocalStorage';
@@ -9,6 +10,7 @@ import { render } from '@testing-library/react';
 import { Link, useHistory } from 'react-router-dom';
 import { FavoritesContext } from '../contexts/FavoritesContext';
 import firebase from '../firebase';
+import { orange } from '@material-ui/core/colors';
 
 
 export default function Home() {
@@ -26,9 +28,9 @@ export default function Home() {
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
     const [favoriteAnimation, setFavoriteAnimation] = useState(false);
+    const [ pop, setPop ] = useState(0);
 
     const ref = firebase.firestore().collection("favorites");
-
 
     async function handleLogout() {
         setError("")
@@ -163,8 +165,13 @@ export default function Home() {
         //setRecipeFavorites(prevFavorites => [...prevFavorites, "New favorite added"]);
     }
 
-    
-
+    function dash(measurement) {
+        if (measurement) {
+            return ("-")
+        } else {
+            console.log("No measurement")
+        }
+    }
 
     return (
         <Container1>
@@ -172,7 +179,7 @@ export default function Home() {
             <Link to ="/update-profile" />
             <Container2>
             <Selector>
-                <Select style={{minWidth: 200}} variant="outlined" displayEmpty value={selector} onChange={pickIngredient}>
+                <StyledSelect style={{minWidth: 200}} variant="outlined" displayEmpty value={selector} onClick={() => {setFavoriteAnimation(false)}} onChange={pickIngredient}>
                     <MenuItem value="">Pick an ingredient</MenuItem>
                     <MenuItem value="Beef">Beef</MenuItem>
                     <MenuItem value="Breakfast">Breakfast</MenuItem>
@@ -188,16 +195,16 @@ export default function Home() {
                     <MenuItem value="Starter">Starter</MenuItem>
                     <MenuItem value="Vegan">Vegan</MenuItem>
                     <MenuItem value="Vegetarian">Vegetarian</MenuItem>
-                </Select>
+                </StyledSelect>
             </Selector>
 
                 {selector === "" && (
                 <IntroContainer>
                     <Intro>
-                        <IntroHeader>Explore New Recipes</IntroHeader>
-                        <IntroSubtitle>Simply pick a category and see what you get</IntroSubtitle>
+                        <IntroHeader>Explore New Recipes!</IntroHeader>
+                        <IntroSubtitle>Simply pick a category and<br></br>see what you get.</IntroSubtitle>
                         <IntroParagraph>Recipes are selected at random. Add to your favorites the recipes you find interesting by simply pressing the favorites button.</IntroParagraph>
-                        <IntroParagraph>Be sure to log in or sign up if you'd like to save recipes.</IntroParagraph>
+                        <IntroParagraph>Be sure to log in or sign up if<br></br>you'd like to save recipes.</IntroParagraph>
                     </Intro>
                 </IntroContainer>
             )}
@@ -212,28 +219,28 @@ export default function Home() {
                     <Ingredients>Ingredients</Ingredients>
                     <IngredientSection>
                     <IngredientContainer>
-                    <Ingredient>{recipe.strIngredient1} {recipe.strMeasure1}</Ingredient>
-                    <Ingredient>{recipe.strIngredient2} {recipe.strMeasure2}</Ingredient>
-                    <Ingredient>{recipe.strIngredient3} {recipe.strMeasure3}</Ingredient>
-                    <Ingredient>{recipe.strIngredient4} {recipe.strMeasure4}</Ingredient>
-                    <Ingredient>{recipe.strIngredient5} {recipe.strMeasure5}</Ingredient>
-                    <Ingredient>{recipe.strIngredient6} {recipe.strMeasure6}</Ingredient>
-                    <Ingredient>{recipe.strIngredient7} {recipe.strMeasure7}</Ingredient>
-                    <Ingredient>{recipe.strIngredient8} {recipe.strMeasure8}</Ingredient>
-                    <Ingredient>{recipe.strIngredient9} {recipe.strMeasure9}</Ingredient>
-                    <Ingredient>{recipe.strIngredient10} {recipe.strMeasure10}</Ingredient>
+                    {recipe.strIngredient1 && ( <Ingredient>{recipe.strIngredient1} {dash(recipe.strMeasure1)} {recipe.strMeasure1}</Ingredient>)}
+                    {recipe.strIngredient2 && (<Ingredient>{recipe.strIngredient2} {dash(recipe.strMeasure2)} {recipe.strMeasure2}</Ingredient>)}
+                    {recipe.strIngredient3 && (<Ingredient>{recipe.strIngredient3} {dash(recipe.strMeasure3)} {recipe.strMeasure3}</Ingredient>)}
+                    {recipe.strIngredient4 && (<Ingredient>{recipe.strIngredient4} {dash(recipe.strMeasure4)} {recipe.strMeasure4}</Ingredient>)}
+                    {recipe.strIngredient5 && (<Ingredient>{recipe.strIngredient5} {dash(recipe.strMeasure5)} {recipe.strMeasure5}</Ingredient>)}
+                    {recipe.strIngredient6 && (<Ingredient>{recipe.strIngredient6} {dash(recipe.strMeasure6)} {recipe.strMeasure6}</Ingredient>)}
+                    {recipe.strIngredient7 && (<Ingredient>{recipe.strIngredient7} {dash(recipe.strMeasure7)} {recipe.strMeasure7}</Ingredient>)}
+                    {recipe.strIngredient8 && (<Ingredient>{recipe.strIngredient8} {dash(recipe.strMeasure8)} {recipe.strMeasure8}</Ingredient>)}
+                    {recipe.strIngredient9 && (<Ingredient>{recipe.strIngredient9} {dash(recipe.strMeasure9)} {recipe.strMeasure9}</Ingredient>)}
+                    {recipe.strIngredient10 && (<Ingredient>{recipe.strIngredient10} {dash(recipe.strMeasure10)} {recipe.strMeasure10}</Ingredient>)}
                     </IngredientContainer>
                     <IngredientContainer>
-                    <Ingredient>{recipe.strIngredient11} {recipe.strMeasure11}</Ingredient>
-                    <Ingredient>{recipe.strIngredient12} {recipe.strMeasure12}</Ingredient>
-                    <Ingredient>{recipe.strIngredient13} {recipe.strMeasure13}</Ingredient>
-                    <Ingredient>{recipe.strIngredient14} {recipe.strMeasure14}</Ingredient>
-                    <Ingredient>{recipe.strIngredient15} {recipe.strMeasure15}</Ingredient>
-                    <Ingredient>{recipe.strIngredient16} {recipe.strMeasure16}</Ingredient>
-                    <Ingredient>{recipe.strIngredient17} {recipe.strMeasure17}</Ingredient>
-                    <Ingredient>{recipe.strIngredient18} {recipe.strMeasure18}</Ingredient>
-                    <Ingredient>{recipe.strIngredient19} {recipe.strMeasure19}</Ingredient>
-                    <Ingredient>{recipe.strIngredient20} {recipe.strMeasure20}</Ingredient>
+                    {recipe.strIngredient11 && (<Ingredient>{recipe.strIngredient11} {dash(recipe.strMeasure11)} {recipe.strMeasure11}</Ingredient>)}
+                    {recipe.strIngredient12 && (<Ingredient>{recipe.strIngredient12} {dash(recipe.strMeasure12)} {recipe.strMeasure12}</Ingredient>)}
+                    {recipe.strIngredient13 && (<Ingredient>{recipe.strIngredient13} {dash(recipe.strMeasure13)} {recipe.strMeasure13}</Ingredient>)}
+                    {recipe.strIngredient14 && (<Ingredient>{recipe.strIngredient14} {dash(recipe.strMeasure14)} {recipe.strMeasure14}</Ingredient>)}
+                    {recipe.strIngredient15 && (<Ingredient>{recipe.strIngredient15} {dash(recipe.strMeasure15)} {recipe.strMeasure15}</Ingredient>)}
+                    {recipe.strIngredient16 && (<Ingredient>{recipe.strIngredient16} {dash(recipe.strMeasure16)} {recipe.strMeasure16}</Ingredient>)}
+                    {recipe.strIngredient17 && (<Ingredient>{recipe.strIngredient17} {dash(recipe.strMeasure17)} {recipe.strMeasure17}</Ingredient>)}
+                    {recipe.strIngredient18 && (<Ingredient>{recipe.strIngredient18} {dash(recipe.strMeasure18)} {recipe.strMeasure18}</Ingredient>)}
+                    {recipe.strIngredient19 && (<Ingredient>{recipe.strIngredient19} {dash(recipe.strMeasure19)} {recipe.strMeasure19}</Ingredient>)}
+                    {recipe.strIngredient20 && (<Ingredient>{recipe.strIngredient20} {dash(recipe.strMeasure20)} {recipe.strMeasure20}</Ingredient>)}
                     </IngredientContainer>
                     </IngredientSection>
                     <Instructions>{recipe.strInstructions}</Instructions>
@@ -298,13 +305,16 @@ export default function Home() {
                         <MessageContainer><Message>Added to favorites!</Message></MessageContainer>
                         )}
                     </Favorites>
+                    <Favorites>
+                    <Link to="/favorites"><FavoritesButton>Go to Favorites</FavoritesButton></Link>
+                    </Favorites>
                     <SourceLinks>
                     <RecipeSource href={recipe.strSource} target="_blank">Where This Recipe Came From</RecipeSource>
                     </SourceLinks>
                     </TextContainer>
                     <ImageSection>
                     <Img src={recipe.strMealThumb} alt={recipe.strMeal} />
-                    {youtubeURL && <Youtube><iframe id="recipeVideo" width="450" height="250" src={youtubeURL} frameborder="0" allowfullscreen></iframe></Youtube>}
+                    {youtubeURL && <Youtube><iframe id="recipeVideo" width="300" height="200" src={youtubeURL} frameborder="0" allowfullscreen></iframe></Youtube>}
                     </ImageSection>
                     </Section1>
                 </RecipeRandomizer>
@@ -312,7 +322,35 @@ export default function Home() {
         </Container2>
     </Container1>
     )
+    
 }
+
+const StyledSelect = styled(Select)({
+    background: '#FF8E53',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    overflow: 'hidden',
+    outline: 'none',
+    '&:focus': {
+        outline: 'none',
+    },
+    '&:hover': {
+        outline: 'none',
+    },
+    '&:active': {
+        outline: 'none',
+    },
+    '&.Mui-selected': {
+        outline: 'none',                                                                   
+      },
+    '&Select:focus': {
+        outline: 'none',                                                                   
+      },
+  });
 
 const Container1 = styled.div`
     display: flex;
@@ -320,6 +358,16 @@ const Container1 = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0px 0px;
+    @media (min-width: 1500px) {
+    position: absolute;
+    width: 1500px;
+    align-self: center;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    }
 `;
 
 const Container2 = styled.div`
@@ -342,23 +390,38 @@ const IntroContainer = styled.div`
     align-items: center;
     background-color: white;
     margin: 40px 20px;
-    border: 0.5px solid orange;
-    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    width: 90%;
     height: auto;
+    border-radius: 20px;
+    box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, .15);
+    @media (min-width: 750px) {
+        width: 650px;
+    }
 `;
 
 const Intro = styled.div`
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 75%;
     height: auto;
     margin: 40px 20px;
+    align-items: center;
+    @media (max-width: 500px) {
+        width: 90%;
+    }
 `;
 
 const IntroHeader = styled.h1`
     text-align: center;
     width: 100%;
     height: auto;
+    @media (max-width: 500px) {
+        font-size: 28px;
+    }
+    @media (max-width: 375px) {
+        font-size: 25px;
+    }
 `;
 
 const IntroSubtitle = styled.h3`
@@ -366,6 +429,13 @@ const IntroSubtitle = styled.h3`
     width: 100%;
     height: auto;
     margin-top: 20px;
+    font-size: 22px;
+    @media (max-width: 500px) {
+        font-size: 20px;
+    }
+    @media (max-width: 375px) {
+        font-size: 18px;
+    }
 `;
 
 const IntroParagraph = styled.p`
@@ -373,6 +443,14 @@ const IntroParagraph = styled.p`
     width: 100%;
     height: auto;
     margin-top: 20px;
+    font-size: 20px;
+    @media (max-width: 500px) {
+        max-width: 85%;
+        font-size: 18px;
+    }
+    @media (max-width: 375px) {
+        font-size: 16px;
+    }
 `;
 
 const RecipeRandomizer = styled.div`
@@ -413,6 +491,12 @@ const ImgVertical = styled.img`
     height: auto;
     margin-bottom: 15px;
     }
+    @media (max-width: 450px) {
+    display: flex;
+    align-self: center;
+    height: auto;
+    margin-bottom: 15px;
+    }
 `;
 
 const TextContainer = styled.div`
@@ -439,18 +523,25 @@ const Subtitle = styled.h2`
     margin: 10px 0px;
     text-align: left;
     width: 90%;
+    font-size: 24px;
 `;
 
 const Instructions = styled.p`
     margin: 20px 50px;
     width: 90%;
     line-height: 1.5em;
-
+    @media (max-width: 450px) {
+    }
 `;
 
 const IngredientSection = styled.div`
     display: flex;
+    flex-direction: row;
     width: 90%;
+    height: auto;
+    @media (max-width: 450px) {
+        flex-direction: column;
+    }
 `;
 
 const IngredientContainer = styled.div`
@@ -468,6 +559,7 @@ const Ingredients = styled.h4`
 const Ingredient = styled.h5`
     margin: 5px 0px;
     width: 100%;
+    height: auto;
 `;
 
 const Section1 = styled.div`
@@ -482,12 +574,21 @@ const Section1 = styled.div`
     align-items: center;
     justify-content: center;
     }
+    @media (max-width: 1000px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
 `;
 
 const Youtube = styled.div`
     display: flex;
     align-self: center;
     margin: 30px 0px;
+    @media (max-width: 450px) {
+        align-self: flex-start;
+        margin-left: 7.5px;
+    }
 `;
 
 const Favorites = styled.div`
@@ -495,31 +596,60 @@ const Favorites = styled.div`
     align-items: center;
     justify-items: center;
     width: 90%;
-    margin: 20px;
+    margin: 5px;
+    @media (max-width: 425px) {
+        align-items: flex-start;
+        justify-items: flex-start;
+        flex-direction: column;
+    }
 `;
 
 const FavoritesButton = styled.button`
     width: 180px;
     height: 50px;
     align-self: flex-start;
-    background: orange;
+    background: #FF8E53;
     color: white;
-    border-radius: 20px;
+    border-radius: 3px;
     outline: none;
     border: none;
     margin-right: 30px;
+    margin-bottom: 10px;
+    box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, .15);
+    cursor: pointer;
+    animation: favoritesAdded 1s linear;
+    animation-iteration-count: 1;
+    font-size: 16px;
+`;
+
+const favoritesAdded = keyframes`
+    0% { transform: translateX(0%); }
+    50% { transform: translateX(50%); }
+    100% { transform: translateX(100%); }
+    50% { transform: translateX(50%); }
+    00% { transform: translateX(0%); }
 `;
 
 const MessageContainer = styled.div`
     width: auto;
     height: auto;
-    background-color: rgb(0,250,154);
-    border: 0.5px solid rgba(9,73,0, 0.5);
+    background-color: white;
+    border: 0.5px solid #FF8E53;
+    animation: pop 1s linear;
+    animation-iteration-count: 1;
+    margin-bottom: 10px;
+    @media (max-width: 425px) {
+        margin-top: 10px;
+    }
 `;
 
 const Message = styled.h5`
     margin: 15px;
-    color: rgb(9,73,0);
+    color: #FF8E53;
+    font-size: 16px;
+    @media (max-width: 425px) {
+        font-size: 15.5px;
+    }
 
 `;
 
@@ -532,6 +662,6 @@ const SourceLinks = styled.div`
 
 const RecipeSource = styled.a`
     text-decoration: none;
-    color: orange;
+    color: #FF8E53;
     font-style: bold;
 `;

@@ -11,9 +11,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from './Components/PrivateRoute';
 import UpdateProfile from './pages/UpdateProfile.js';
 import { FavoritesProvider } from './contexts/FavoritesContext';
+import { StylesProvider } from '@material-ui/core/styles';
 
 function App() {
   return (
+    <StylesProvider injectFirst>
     <Router>
     <FavoritesProvider>
     <AuthProvider>
@@ -30,6 +32,7 @@ function App() {
     </AuthProvider>
     </FavoritesProvider>
     </Router>
+    </StylesProvider>
   )
 };
 
