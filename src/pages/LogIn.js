@@ -166,6 +166,7 @@ const InputSubmit = styled.button`
     outline: none;
     border: 0.25px solid white;
     font-size: 16px;
+    cursor: pointer;
 `;
 
 export default LogIn;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
-import LogoImg from '../images/fresh_dish_logo_2.png';
+import LogoImg from '../images/fresh_dish_logo.png';
 import LogoMobileImg from '../images/fresh_dish_logo_1_mobile.png';
 
 function Nav() {
@@ -24,15 +24,17 @@ function Nav() {
 
     return (
         <NavContainer>
-        <LogoContainer>
-            <Link to="/"><LogoImage src={LogoImg} alt={LogoImg} /></Link>
-            <Link to="/"><LogoMobile src={LogoMobileImg} alt={LogoMobile} /></Link>
-        </LogoContainer>
-            {currentUser && <LogOut onClick={handleLogout}>Log Out</LogOut>}
-            <AccountAction>
-            {!currentUser && <Login><Link to="/login" style={{ textDecoration: 'none', color:'white' }}>Log In</Link></Login>}
-            {!currentUser && <SignUp><Link to="/signup" style={{ textDecoration: 'none', color:'white' }}>Sign Up</Link></SignUp>}
-            </AccountAction>
+            <Navigation>
+            <LogoContainer>
+                    <Link to="/"><LogoImage src={LogoImg} alt={LogoImg} /></Link>
+                    <Link to="/"><LogoMobile src={LogoMobileImg} alt={LogoMobile} /></Link>
+            </LogoContainer>
+                {currentUser && <LogOut onClick={handleLogout}>Log Out</LogOut>}
+                <AccountAction>
+                {!currentUser && <Login><Link to="/login" style={{ textDecoration: 'none', color:'white' }}>Log In</Link></Login>}
+                {!currentUser && <SignUp><Link to="/signup" style={{ textDecoration: 'none', color:'white' }}>Sign Up</Link></SignUp>}
+                </AccountAction>
+            </Navigation>
         </NavContainer>
     )
 }
@@ -41,9 +43,24 @@ const NavContainer = styled.div`
     display: flex;
     width: 100vw;
     height: 110px;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
+`;
+
+const Navigation = styled.div`
+    display: flex;
+    max-width: 1500px;
+    margin: 0px 0px 0px 0px;
+    width: 100vw;
+    height: 110px;
+    justify-content: space-between;
+`;
+
+const StyledLogo = styled(Link) `
+    width: 1000px;
+    overflow: hidden;
 `;
 
 const LogoContainer = styled.div`
@@ -53,29 +70,25 @@ const LogoContainer = styled.div`
     align-items: center;
     margin-left: 30px;
     @media (max-width: 500px) {
-        margin-left: 55px;
-        width: 70%;
     }
     @media (max-width: 400px) {
-        margin-left: 45px;
-        width: 70%;
     }
 `;
 
 const LogoImage = styled.img`
-    width: 500px;
-    height: 100px;
+    width: 350px;
+    height: auto;
     align-self: center;
     justify-self: center;
     object-fit: cover;
-    @media (max-width: 800px) {
-        width: 350px;
+    @media (max-width: 1025px) {
+        width: 300px;
         height: auto;
     }
     @media (max-width: 600px) {
         width: 250px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 550px) {
         display: none;
     }
 `;
@@ -93,18 +106,20 @@ const LogoMobile = styled.img`
     align-self: center;
     justify-self: center;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 550px) {
     display: flex;
-    width: 200px;
+    width: 150px;
     align-self: center;
     justify-self: center;
     }
+    @media (max-width: 450px) {
+        width: 125px;
+    }
     @media (max-width: 400px) {
-    display: flex;
-    width: 40vw;
-    height: 30px;
-    align-self: center;
-    justify-self: center;
+    width: 100px;
+    }
+    @media (max-width: 350px) {
+    width: 80px;
     }
 `;
 
@@ -119,6 +134,12 @@ const Logo = styled.h2`
 
 const AccountAction = styled.div`
     display: flex;
+    @media (min-width: 1200px) {
+    margin: 0px 30px 0px 0px;
+    }
+    @media (max-width: 1200px) {
+    margin: 0px 20px 0px 0px;
+    }
     @media (max-width: 400px) {
     margin: 0px 5px 0px 0px;
     }
@@ -146,13 +167,10 @@ const Login = styled.h3`
     //width: 120px;
     transform: translateY(-5px);
     }
-        @media (min-width: 500px) and (max-width: 550px) {
-    //width: 100px;
-    }
-    @media (max-width: 500px) {
+    @media (max-width: 550px) {
     //width: 80px;
     width: 250px;
-    font-size: 12px;
+    font-size: 16px;
     margin: 0px 7.5px;
     }
 `;
@@ -181,9 +199,9 @@ const SignUp = styled.h3`
     @media (min-width: 500px) and (max-width: 550px) {
     //width: 100px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 550px) {
     width: 250px;
-    font-size: 12px;
+    font-size: 16px;
     margin: 0px 7.5px;
     }
 `;

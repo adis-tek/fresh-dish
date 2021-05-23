@@ -137,7 +137,7 @@ export default function Home() {
 
     useEffect(() => {
         if (mealId !== undefined) {
-        axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+        axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=52947`)
         .then(function (response) {
             console.log(response.data?.meals[0]);
             setRecipe(response.data?.meals[0]);
@@ -620,14 +620,6 @@ const FavoritesButton = styled.button`
     animation: favoritesAdded 1s linear;
     animation-iteration-count: 1;
     font-size: 16px;
-`;
-
-const favoritesAdded = keyframes`
-    0% { transform: translateX(0%); }
-    50% { transform: translateX(50%); }
-    100% { transform: translateX(100%); }
-    50% { transform: translateX(50%); }
-    00% { transform: translateX(0%); }
 `;
 
 const MessageContainer = styled.div`

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext} from 'react';
 import { FavoritesContext } from '../contexts/FavoritesContext';
 import styled from 'styled-components';
-import deleteCircle from '../images/x.png';
+import closeX from '../images/closeX.svg';
 import firebase from '../firebase';
 import { faDashcube } from '@fortawesome/free-brands-svg-icons';
 
@@ -121,7 +121,7 @@ const Favorites = () => {
         <Container>
             {initiateRight === true && (
                 <Mobile>
-                    <MobileDelete src={deleteCircle} alt={favorites.name} id={favorites.mealId} onClick={off} />
+                    <MobileDelete src={closeX} alt={favorites.name} id={favorites.mealId} onClick={off} />
                     <RecipeRandomizer>
                     <Section1>
                     <ImgVertical src={rightDisplay?.photo} alt={rightDisplay?.name} />
@@ -177,7 +177,7 @@ const Favorites = () => {
                     <Description>{favorites.instructions.slice(0, 100)}...</Description>
                     <Tags>{favorites.country} Recipe - {favorites.category}</Tags>
                     </FavoriteContainer>
-                    <Delete src={deleteCircle} alt={favorites.name} id={favorites.mealId} onClick={deleteFavorites} />
+                    <Delete src={closeX} alt={favorites.name} id={favorites.mealId} onClick={deleteFavorites} />
                 </Favorite>
                 ))}
             </Left>
@@ -308,7 +308,7 @@ const Mobile = styled.div`
 const MobileDelete = styled.img`
     display: flex;
     align-self: flex-end;
-    width: 50%;
+    width: 4%;
     height: auto;
     object-fit: cover;
     text-align: center;
@@ -387,8 +387,8 @@ const Tags = styled.p`
 const Delete = styled.img`
     display: flex;
     align-self: flex-start;
-    width: 7%;
-    height: 7%;
+    width: 8%;
+    height: 8%;
     text-align: center;
     overflow: hidden;
     cursor: pointer;
