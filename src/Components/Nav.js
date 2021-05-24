@@ -26,8 +26,8 @@ function Nav() {
         <NavContainer>
             <Navigation>
             <LogoContainer>
-                    <Link to="/"><LogoImage src={LogoImg} alt={LogoImg} /></Link>
-                    <Link to="/"><LogoMobile src={LogoMobileImg} alt={LogoMobile} /></Link>
+                    <Link to="/fresh-dish"><LogoImage src={LogoImg} alt={LogoImg} /></Link>
+                    <Link to="/fresh-dish"><LogoMobile src={LogoMobileImg} alt={LogoMobile} /></Link>
             </LogoContainer>
                 {currentUser && <LogOut onClick={handleLogout}>Log Out</LogOut>}
                 <AccountAction>
