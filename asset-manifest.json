@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/fresh-dish/static/css/main.2ae47eeb.chunk.css",
+    "main.js": "/fresh-dish/static/js/main.2599fe65.chunk.js",
+    "main.js.map": "/fresh-dish/static/js/main.2599fe65.chunk.js.map",
+    "runtime-main.js": "/fresh-dish/static/js/runtime-main.a6e59e89.js",
+    "runtime-main.js.map": "/fresh-dish/static/js/runtime-main.a6e59e89.js.map",
+    "static/js/2.21073483.chunk.js": "/fresh-dish/static/js/2.21073483.chunk.js",
+    "static/js/2.21073483.chunk.js.map": "/fresh-dish/static/js/2.21073483.chunk.js.map",
+    "static/js/3.8bfe0269.chunk.js": "/fresh-dish/static/js/3.8bfe0269.chunk.js",
+    "static/js/3.8bfe0269.chunk.js.map": "/fresh-dish/static/js/3.8bfe0269.chunk.js.map",
+    "index.html": "/fresh-dish/index.html",
+    "static/css/main.2ae47eeb.chunk.css.map": "/fresh-dish/static/css/main.2ae47eeb.chunk.css.map",
+    "static/js/2.21073483.chunk.js.LICENSE.txt": "/fresh-dish/static/js/2.21073483.chunk.js.LICENSE.txt",
+    "static/media/closeX.4c830ce3.svg": "/fresh-dish/static/media/closeX.4c830ce3.svg",
+    "static/media/food_background_horizontal.97bc7a3b.jpg": "/fresh-dish/static/media/food_background_horizontal.97bc7a3b.jpg",
+    "static/media/food_background_vertical.4d31c143.jpg": "/fresh-dish/static/media/food_background_vertical.4d31c143.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a6e59e89.js",
+    "static/js/2.21073483.chunk.js",
+    "static/css/main.2ae47eeb.chunk.css",
+    "static/js/main.2599fe65.chunk.js"
+  ]
+}
