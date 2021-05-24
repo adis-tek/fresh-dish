@@ -21,7 +21,7 @@ function App() {
     <AuthProvider>
       <Nav />
       <Switch>
-        <Route path="/fresh-dish" component={Home} />
+        <Route exact path="/fresh-dish" component={Home} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={LogIn} />
         <Route path="/forgot-password" component={ForgotPassword} />
