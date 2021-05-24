@@ -137,7 +137,7 @@ export default function Home() {
 
     useEffect(() => {
         if (mealId !== undefined) {
-        axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=52947`)
+        axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
         .then(function (response) {
             console.log(response.data?.meals[0]);
             setRecipe(response.data?.meals[0]);
