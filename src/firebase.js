@@ -3,13 +3,12 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const app = firebase.initializeApp({
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_DATABASE_URL,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_APP_ID,
+    apiKey: "AIzaSyDC_hkPKKhq2dl_5gNAZr_ZmVGju7YbJsQ",
+    authDomain: "auth-fresh-dish-development.firebaseapp.com",
+    projectId: "auth-fresh-dish-development",
+    storageBucket: "auth-fresh-dish-development.appspot.com",
+    messagingSenderId: "3870442167",
+    appId: "1:3870442167:web:437d6d9ae5127c3b39c332"
 })
 
 export const auth = app.auth();
