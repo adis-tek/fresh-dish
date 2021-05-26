@@ -1,16 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import styled, { keyframes } from 'styled-components';
-import { motion } from 'framer-motion';
 import { Select, MenuItem } from '@material-ui/core';
-import { makeStyles } from "@material-ui/core/styles";
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
-import useLocalStorage from '../useLocalStorage';
-import { render } from '@testing-library/react';
 import { Link, useHistory } from 'react-router-dom';
-import { FavoritesContext } from '../contexts/FavoritesContext';
 import firebase from '../firebase';
-import { orange } from '@material-ui/core/colors';
 
 
 export default function Home() {
@@ -335,21 +329,6 @@ const StyledSelect = styled(Select)({
     padding: '0 30px',
     overflow: 'hidden',
     outline: 'none',
-    '&:focus': {
-        outline: 'none',
-    },
-    '&:hover': {
-        outline: 'none',
-    },
-    '&:active': {
-        outline: 'none',
-    },
-    '&.Mui-selected': {
-        outline: 'none',                                                                   
-      },
-    '&Select:focus': {
-        outline: 'none',                                                                   
-      },
   });
 
 const Container1 = styled.div`

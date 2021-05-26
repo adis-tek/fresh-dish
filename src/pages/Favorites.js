@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useRef, useContext} from 'react';
-import { FavoritesContext } from '../contexts/FavoritesContext';
 import styled from 'styled-components';
 import closeX from '../images/closeX.svg';
 import firebase from '../firebase';
-import { faDashcube } from '@fortawesome/free-brands-svg-icons';
 
 const Favorites = () => {
-    const [recipeFavorites, setRecipeFavorites] = useContext(FavoritesContext);
-    const [initiateRight, setInitiateRight] = useState(false); //RESET THIS!!!!!! TO FALSE!!!!
+    const [initiateRight, setInitiateRight] = useState(false);
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
     const [deleteId, setDeleteId] = useState("");
     const [rightDisplay, setRightDisplay] = useState([]);
-    const [test, setTest] = useState(true);
 
     const ref = firebase.firestore().collection("favorites");
 
@@ -52,21 +48,6 @@ const Favorites = () => {
         return <h1>Loading...</h1>;
     }
 
-    function firebaseTest() {
-        ref
-            .doc("52858")
-            .get().then((doc) => {
-                if (doc.data !== undefined) {
-                console.log(doc.data())
-                const data = doc.data();
-                setRightDisplay(data);
-                console.log(data);
-                }   else {
-                    console.log("no doc")
-                }
-            })
-    }
-
     function divClick(event) {
         console.log("Div was clicked");
         const id = event?.currentTarget?.id;
@@ -103,10 +84,6 @@ const Favorites = () => {
 
     function on() {
         setInitiateRight(true);
-    }
-
-    function testFunc() {
-        setTest(true);
     }
 
     function dash(measurement) {
@@ -243,10 +220,6 @@ const Favorites = () => {
     )}
     </Container>
 )}
-
-const FavHeader = styled.h1`
-    align-self: center;
-`;
 
 const Container = styled.div`
     display: flex;
@@ -402,67 +375,6 @@ const Delete = styled.img`
     width: 7%;
     height: 7%;
     }
-`;
-
-const Container1 = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 0px;
-`;
-
-const Container2 = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
-`;
-
-const Selector = styled.div`
-    margin: 0px;
-`;
-
-const IntroContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    margin: 40px 20px;
-    border: 0.5px solid orange;
-    width: 100%;
-    height: auto;
-`;
-
-const Intro = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: auto;
-    margin: 40px 20px;
-`;
-
-const IntroHeader = styled.h1`
-    text-align: center;
-    width: 100%;
-    height: auto;
-`;
-
-const IntroSubtitle = styled.h3`
-    text-align: center;
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-`;
-
-const IntroParagraph = styled.p`
-    text-align: center;
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
 `;
 
 const RecipeRandomizer = styled.div`
@@ -650,15 +562,6 @@ const Youtube = styled.div`
     display: flex;
     align-self: center;
     margin: 30px 0px;
-`;
-
-const FavoritesButton = styled.button`
-    width: 180px;
-    height: 50px;
-    align-self: flex-start;
-    background: orange;
-    color: white;
-    border-radius: 20px;
 `;
 
 const SourceLinks = styled.div`

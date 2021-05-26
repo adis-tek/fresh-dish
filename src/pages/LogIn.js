@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import food_background_vertical from '../images/food_background_vertical.jpg';
 import food_background_horizontal from '../images/food_background_horizontal.jpg';
