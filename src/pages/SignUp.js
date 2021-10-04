@@ -48,12 +48,12 @@ function SignUp() {
 
                 <InputContainer>
                 <Label for="password">Password</Label><br></br>
-                <InputText type="text" id="password" name="password" ref={passwordRef} />
+                <InputText type="password" id="password" name="password" ref={passwordRef} />
                 </InputContainer>
 
                 <InputContainer>
                 <Label for="confirmPassword">Confirm Password</Label><br></br>
-                <InputText type="text" id="confirmPassword" name="confirmPassword" ref={passwordConfirmRef} />
+                <InputText type="password" id="confirmPassword" name="confirmPassword" ref={passwordConfirmRef} />
                 </InputContainer>
 
                 <InputSubmit disabled={loading}>Sign Up</InputSubmit>

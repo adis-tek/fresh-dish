@@ -42,7 +42,7 @@ function LogIn() {
 
                 <InputContainer>
                 <Label for="password">Password</Label><br></br>
-                <InputText type="text" id="password" name="password" ref={passwordRef} />
+                <InputText type="password" id="password" name="password" ref={passwordRef} />
                 </InputContainer>
 
                 <InputSubmit disabled={loading}>Log In</InputSubmit>
