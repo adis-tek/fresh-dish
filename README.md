@@ -1,3 +1,27 @@
+# Fresh Dish - Discover new recipes
+Pick a category and recieve a random recipe to try out.
+## Features
+* Multi page web app.
+* Log in and registration features.
+* Create, read, and delete recipes that you discover.
+* A fully mobile-responsive design from desktop to tablet and to mobile.
+
+## Technology
+* This app was built using the React framework.
+* The project was styled using the styled-components dependency.
+* The data comes from an API called themealdb.com
+* Log in and registration via firebase.
+* View your favorite recipes after you log in and delete the ones you no longer like.
+* Add new recipes to your account with a press of a button.
+
+## Lessons Learned
+* How to work with an API.
+* How to manipulate API data.
+* How to display API data.
+* How to authenticate users.
+* How to create, read, and delete data.
+
+---
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
