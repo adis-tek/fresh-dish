@@ -1,9 +1,9 @@
 # Fresh Dish - Discover new recipes
 Pick a category and recieve a random recipe to try out.
 ## Features
-* Multi page web app.
+* Multi-page web app.
 * Log in and registration features.
-* Create, read, and delete recipes that you discover.
+* The app creates, reads, and deletes recipes.
 * A fully mobile-responsive design from desktop to tablet and to mobile.
 
 ## Technology
@@ -12,7 +12,7 @@ Pick a category and recieve a random recipe to try out.
 * The data comes from an API called themealdb.com
 * Log in and registration via firebase.
 * View your favorite recipes after you log in and delete the ones you no longer like.
-* Add new recipes to your account with a press of a button.
+* Add new recipes to your account with the press of a button.
 
 ## Lessons Learned
 * How to work with an API.
